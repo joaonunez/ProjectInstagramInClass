@@ -1,0 +1,2 @@
+pipenv shell
+pipenv install flask flask-sqlalchemy flask-migrate flask-cors
