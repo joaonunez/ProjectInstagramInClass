@@ -77,6 +77,7 @@ def create_comment():
 
     return jsonify({"msg": "Comentario creado", "data": comment.serialize()}), 200
 
+#obtener todos los posts
 @app.route("/posts", methods=["GET"])
 def get_posts():
     posts = Post.query.all()
@@ -85,8 +86,16 @@ def get_posts():
         "data": posts
     }), 200
 
+#obtener un post
+@app.route("/post/<int:id>", methods=["GET"])
+def get_post_by_id(id):
+    post = Post.query.get(id)
+    return jsonify({
+        "data": post
+    }), 200
 
-@app.route("/comments(<int:post_id>)", methods=["GET"])
+#obtener comentarios de un post
+@app.route("/comments/<int:post_id>", methods=["GET"])
 def get_comments_by_post(post_id):
     comments = Comment.query.filter_by(post_id = post_id).all() #filtrara por columna cuando la columna post_id sea igual al parametro pasado ala funcion
     comments = list(map(lambda comment: comment.serialize(), comments))
