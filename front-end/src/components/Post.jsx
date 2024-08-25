@@ -9,10 +9,10 @@ function Post(props) {
             {props.title}
           </strong>
           <h3 className="mb-0">{props.subtitle}</h3>
-          <div className="mb-1 text-body-secondary">{props.date}</div>
-          <p className="card-text mb-auto">
-            {props.body}
-          </p>
+          <div className="mb-1 text-body-secondary">
+            {new Date(props.create_at).toLocaleDateString()}
+          </div>
+          <p className="card-text mb-auto">{props.body}</p>
           <a
             href="#"
             className="icon-link gap-1 icon-link-hover stretched-link"

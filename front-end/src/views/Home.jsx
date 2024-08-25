@@ -14,7 +14,7 @@ export function Home() {
     <>
       <Jumbotron />
       {store.posts.length ? (
-        store.posts.map((post) => <Post title={post.title} subtitle={post.subtitle} body={post.body} date={post.date} />)
+        store.posts.map((post) => <Post title={post.title} subtitle={post.subtitle} body={post.body} create_at={post.create_at} />)
       ) : (
         <h1>Loading</h1>
       )}

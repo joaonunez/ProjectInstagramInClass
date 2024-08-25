@@ -120,10 +120,17 @@ def get_comments_by_post(post_id):
     }), 200
 
 
+#borrar comentarios por id
+@app.route("/comment/<int:id>", methods=["DELETE"])
+def delete_coment_by_id(id):
+    comment = Comment.query.get(id)
+    if not comment:
+        return jsonify({"message:" "comentario no encontrado"}), 404
+    
+    db.session.delete(comment)
+    db.session.commit()
 
-
-
-
+    return jsonify({"message": "Comentario eliminado correctamente"}), 200
 
 
 
