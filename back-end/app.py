@@ -94,6 +94,22 @@ def get_post_by_id(id):
         "data": post
     }), 200
 
+
+# Eliminar un post por ID
+@app.route("/post/<int:id>", methods=["DELETE"])
+def delete_post_by_id(id):
+    post = Post.query.get(id)
+    
+    if not post:
+        return jsonify({"message": "Post not found"}), 404
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return jsonify({"message": "Post deleted successfully"}), 200
+
+
+
 #obtener comentarios de un post
 @app.route("/comments/<int:post_id>", methods=["GET"])
 def get_comments_by_post(post_id):
