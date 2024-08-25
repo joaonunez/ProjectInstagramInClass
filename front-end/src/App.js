@@ -1,15 +1,17 @@
-import React from "react"
-import {BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./views/Home";
+import injectContext from "./store/Context";
 function App() {
   return (
     <>
       <Router>
-        <Route path="/" element={<Home/>}/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
       </Router>
     </>
   );
-
 }
 
-export default App;
+export default injectContext(App);
