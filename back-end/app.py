@@ -19,7 +19,7 @@ def create_user():
     data = request.get_json()
     user = User()
     if data:
-        email = data["email"]
+        email = request.json.get("email")
         if email:
             user.email = email
         else:
@@ -47,7 +47,7 @@ def create_post():
     post.body = data["body"]
     
 
-    user_id = data["user_id"]
+    user_id = request.json.get("user_id")
     if user_id is not None:
         post.user_id = user_id
     else:
@@ -62,15 +62,37 @@ def create_post():
 def create_comment():
     comment = Comment()
     data = request.get_json()
-    user_id = data["user_id"]
-    post_id = data["post_id"]
+    user_id = request.json.get("user_id")
+    post_id = request.json.get("post_id")
     if user_id is not None and post_id is not None:
         comment.user_id = user_id
         comment.post_id = post_id
     else:
         return jsonify({"msg": "el id de autor y el id de post es requerido"}), 400
 
+    comment.text = data["text"]
 
+    db.session.add(comment)
+    db.session.commit()
+
+    return jsonify({"msg": "Comentario creado", "data": comment.serialize()}), 200
+
+@app.route("/posts", methods=["GET"])
+def get_posts():
+    posts = Post.query.all()
+    posts = list(map(lambda post: post.serialize(), posts))
+    return jsonify({
+        "data": posts
+    }), 200
+
+
+@app.route("/comments(<int:post_id>)", methods=["GET"])
+def get_comments_by_post(post_id):
+    comments = Comment.query.filter_by(post_id = post_id).all() #filtrara por columna cuando la columna post_id sea igual al parametro pasado ala funcion
+    comments = list(map(lambda comment: comment.serialize(), comments))
+    return jsonify({
+        "data": comments
+    }), 200
 
 
 
