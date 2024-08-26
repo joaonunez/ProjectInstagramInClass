@@ -91,7 +91,7 @@ def get_posts():
 def get_post_by_id(id):
     post = Post.query.get(id)
     return jsonify({
-        "data": post
+        "data": post.serialize()##esimportante serializar para que pueda leer bien el post tal como en el get anterior
     }), 200
 
 

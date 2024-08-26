@@ -1,5 +1,6 @@
 import React from "react";
 
+import {Link} from "react-router-dom"
 function NavBar() {
   return (
     <>
@@ -48,12 +49,10 @@ function NavBar() {
 
         <div className="nav-scroller py-1 mb-3 border-bottom">
           <nav className="nav nav-underline justify-content-between">
-            <a className="nav-item nav-link link-body-emphasis active" href="#">
-              World
-            </a>
-            <a className="nav-item nav-link link-body-emphasis" href="#">
-              U.S.
-            </a>
+            
+            <Link to={"/"} className="nav-item nav-link link-body-emphasis">Home</Link>
+            <Link to={"/events"} className="nav-item nav-link link-body-emphasis">Events</Link>
+
             <a className="nav-item nav-link link-body-emphasis" href="#">
               Technology
             </a>

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Post(props) {
   return (
     <>
@@ -13,15 +13,15 @@ function Post(props) {
             {new Date(props.create_at).toLocaleDateString()}
           </div>
           <p className="card-text mb-auto">{props.body}</p>
-          <a
-            href="#"
+          <Link
+            to={"/post/"+ props.id}
             className="icon-link gap-1 icon-link-hover stretched-link"
           >
-            Continue reading
+            Ver publicación
             <svg className="bi">
               <use xlinkhref="#chevron-right"></use>
             </svg>
-          </a>
+          </Link>
         </div>
         <div className="col-auto d-none d-lg-block">
           <svg
