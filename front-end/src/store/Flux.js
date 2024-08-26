@@ -3,6 +3,7 @@ const getState = ({ getActions, getStore, setStore }) => {
     store: {
       posts: [],
       post: {},
+      comments:[],
     },
     actions: {
       getPosts: async () => {
@@ -19,6 +20,13 @@ const getState = ({ getActions, getStore, setStore }) => {
           post: data.data,
         });
       },
+      getCommentsByPostId: async(postId) =>{
+        const response = await fetch("http://localhost:5000/comments/" + postId);
+        const data = await response.json();
+        setStore({
+          comments: data.data,
+        });
+      }
     },
   };
 };

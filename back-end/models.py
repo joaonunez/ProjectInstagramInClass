@@ -9,7 +9,7 @@ class User(db.Model):
     first_name = db.Column(db.String(200))
     last_name = db.Column(db.String(200))
     post = db.relationship("Post")
-    comment = db.relationship("Comment")
+    comment = db.relationship("Comment", backref="user")
     
     def serialize(self):
         return{
@@ -53,5 +53,6 @@ class Comment(db.Model):
             "text": self.text,
             "created_at": self.created_at,
             "user_id": self.user_id,
+            "name": self.user.first_name+ " " + self.user.last_name,#agregado para consultar un dato relacinado de otra tabla
             "post_id": self.post_id
         }

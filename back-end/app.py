@@ -77,6 +77,8 @@ def create_comment():
 
     return jsonify({"msg": "Comentario creado", "data": comment.serialize()}), 200
 
+
+
 #obtener todos los posts
 @app.route("/posts", methods=["GET"])
 def get_posts():
